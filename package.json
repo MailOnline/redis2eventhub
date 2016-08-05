@@ -2,7 +2,7 @@
   "name": "redis2events",
   "version": "0.0.1",
   "description": "Subscribe to redis queue and sent events",
-  "main": "index.js",
+  "main": "index_pub_sub.js",
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
