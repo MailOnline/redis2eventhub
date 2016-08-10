@@ -36,7 +36,7 @@ client.connect(AMQP_URL).then(() => {
             console.warn('===> TX ERROR: ', tx_err)
             console.log(`===> TX messages sending: ${sent - (settled+errors)}, settled: ${settled}, failed: ${errors} (linkCredit: ${linkCredit})`)
         });
-        redis.psubscribe("*",  (err, count) => {
+        redis.psubscribe("imported:*",  (err, count) => {
             if (err) {
                 process.exitCode = 1;
                 throw new Error(`cannot subscribe to redis channel ${REDIS_CHANNEL}`);
@@ -47,6 +47,7 @@ client.connect(AMQP_URL).then(() => {
         redis.on('pmessage', (pattern, channel, message) => {
             try {
                 let msg = JSON.parse(message);
+                msg.eventChannel = channel;
                 sender.send(msg).then ((res) => {
                     // promises are resolved when a disposition frame is received from the remote link for the sent message, at this point the message is considered "settled". 
                     settled++; 
