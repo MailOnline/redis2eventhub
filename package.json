@@ -4,7 +4,7 @@
   "description": "Subscribe to redis queue and sent events",
   "main": "index_pub_sub.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "nodejs index_pub_sub.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
